@@ -1,7 +1,5 @@
-import React from 'react'
-import Navbar from './Components/Navbar/Navbar'
 
-<h1> hello </h1>
+import Navbar from './Components/Navbar/Navbar'
 
 const App = () => {
   return (
