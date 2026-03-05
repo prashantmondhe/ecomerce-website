@@ -1,21 +1,19 @@
 
 
-
-
 import { BsArrowRight } from "react-icons/bs"; 
 
 const Hero = () => {
   return (
     <div className="container">
       <div className="grid xl:grid-cols-3 xl:grid-rows-2 gap-8">
+        
+        {/* Dry Fruits Section */}
         <div className="xl:col-span-2 xl:row-start-1 xl:row-end-[-1] relative">
             <img 
               className="w-full h-full object-cover rounded-lg"
               src="/dryfruit.jpg" 
-              alt="hero image"
+              alt="dry fruits hero image"
             />
-          
-          
             <div className="absolute max-w-[470px] sm:ml-16 ml-8 top-[50%] -translate-y-[50%] sm:space-y-4">
               <p className="text-2xl hidden sm:block"> 100% Original Dry Fruits</p>
               
@@ -23,9 +21,9 @@ const Hero = () => {
                 Dried Fruits Best Healthy
               </h2>
               
-              <p className="text-black-500 text-xl pt-4 sm:pt-8">Starting At</p>
+              <p className="text-blue-500 text-xl pt-4 sm:pt-8">Starting At</p>
               
-              <div className="font-medium text-red-600 text-2xl sm:text-4xl pb-4 sm:pb-8">
+              <div className="font-medium text-blue-600 text-2xl sm:text-4xl pb-4 sm:pb-8">
                 Rs.50
               </div>
               
@@ -35,20 +33,46 @@ const Hero = () => {
             </div>
         </div>
 
+         {/* Pizza Section */}
          <div className="relative">
             <img 
             className="h-full w-full object-cover rounded-lg"
              src="/pizza-1.webp"
-              alt="hero image"
+              alt="pizza image"
               /> 
+            
+           
+            <div className="absolute max-w-[470px] sm:ml-8 ml-4 top-[50%] -translate-y-[50%] sm:space-y-2">
+              <h3 className="text-2xl sm:text-3xl font-bold">Best Yummy Pizza</h3>
+              <p className="text-blue-500 text-xl pt-4">Starting At</p>
+              <div className="font-medium text-blue-600 text-2xl sm:text-4xl pb-4">
+                Rs.100
+              </div>
+              <div className="bg-accent hover:bg-accentDark text-white rounded-full w-fit flex items-center gap-4 px-4 py-2 text-[14px] cursor-pointer">
+                Shop Now <BsArrowRight />
+              </div>
+            </div>
          </div>
 
-           <div className="relative">
+         {/* Chips Section */}
+         <div className="relative">
             <img 
             className="h-full w-full object-cover rounded-lg"
              src="/chips-1.jpg"
-              alt="hero image"
+              alt="chips image"
               /> 
+            
+            
+            <div className="absolute max-w-[470px] sm:ml-8 ml-4 top-[50%] -translate-y-[50%] sm:space-y-2">
+              <h3 className="text-2xl sm:text-3xl font-bold">Best Chips</h3>
+              <p className="text-blue-500 text-xl pt-4">Starting At</p>
+              <div className="font-medium text-blue-600 text-2xl sm:text-4xl pb-4">
+                Rs.10
+              </div>
+              <div className="bg-accent hover:bg-accentDark text-white rounded-full w-fit flex items-center gap-4 px-4 py-2 text-[14px] cursor-pointer">
+                Shop Now <BsArrowRight />
+              </div>
+            </div>
          </div>
 
       </div>
