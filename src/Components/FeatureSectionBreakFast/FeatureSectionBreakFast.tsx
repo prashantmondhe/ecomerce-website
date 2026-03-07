@@ -3,42 +3,45 @@
 import ProductCard from "../ProductCard/ProductCard";
 
 const data = [
-  { id: 0, img: "/mango2.jpg", name: "Dried Mango", price: "Rs.500" },
-  { id: 1, img: "/tomato2.avif", name: "Fresh Tomato", price: "Rs.150" },
-  { id: 2, img: "/jewel2.jfif", name: "Jewel Cranberries", price: "Rs.200" },
-  { id: 3, img: "/ginger2.webp", name: "Fresh Ginger", price: "Rs.150" },
+  { id: 0, img: "/bread3.jfif", name: "Fresh Bread", price: "Rs.100" },
+  { id: 1, img: "/waffle3.webp", name: "Crunchy Waffle", price: "Rs.200" },
+  { id: 2, img: "/yougurt3.jpg", name: "Fresh Yogurt", price: "Rs.100" },
+  { id: 3, img: "/cornflakes3.jpg", name: "Cornflakes", price: "Rs.150" },
 ];
 
-const FeatureSectionFruits = () => {
+const FeatureSectionBreakFast = () => {
   return (
     <div className="container pt-16">
       <div className="lg:flex justify-between items-center">
         
         <div>
-          <h3 className="font-medium text-2xl">Fruits & Vegetables</h3>
+          <h3 className="font-medium text-2xl">BreakFast & Dairy</h3>
           <p className="text-gray-600 mt-2">
-            Buy farm fresh fruits and vegetables online at the best price
+            Buy best quality breakfast online from shop near you
           </p> 
         </div>
         
         <div className="space-x-4 mt-8 lg:mt-0">
-          <button className="feature-btn">Fruits</button> 
+          <button className="feature-btn">Yogurt</button> 
           <button className="text-gray-600 hover:text-accent">
-            Vegetables
+            Waffles
           </button> 
           <button className="text-gray-600 hover:text-accent">
-           Fresh Items
+            Bread & Bakery
           </button>
         </div>
 
       </div>
 
-      <div className="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 pt-8 gap-2">
+      
+      
+      <div className="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 pt-8 gap-4 items-stretch">
   
-        <div>
+        
+        <div className="h-full w-full rounded-lg overflow-hidden border border-gray-200">
           <img 
             className="w-full h-full object-cover"
-            src="/fruit-veg2.jpg"
+            src="/breakfast3.jfif"
             alt="banner"
           />
         </div>
@@ -57,4 +60,4 @@ const FeatureSectionFruits = () => {
   );
 }
 
-export default FeatureSectionFruits;
+export default FeatureSectionBreakFast;
