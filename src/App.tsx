@@ -7,24 +7,39 @@ import FeatureSectionFruits from './Components/FeatureSectionFruits/FeatureSecti
 import FeatureSectionBreakFast from './Components/FeatureSectionBreakFast/FeatureSectionBreakFast';
 import Banner from './Components/Banner/Banner';
 import BlogSection from './Components/BlogSection/BlogSection';
+import NewsLetter from './Components/NewsLetter/NewsLetter';
+import Feature from './Components/Feature/Feature';
+import Footer from './Components/Footer/Footer';
+import { CartContextProvider } from './Components/Context/CartContext';
+import { useState } from 'react';
 
 
-
+import Cart from './Components/Cart/Cart'; 
 
 const App = () => {
+  const [showCart, setShowCart] = useState(false);
+
   return (
-    <main>
-      <Navbar />
-      <MobNavbar />
-      <Hero />
-      <Category />
-      <FeatureSectionFruits/>
-      <FeatureSectionBreakFast/>
-      <Banner/>
-      <BlogSection/>
-    
-    </main>
-  )
+    <CartContextProvider>
+      <main>
+        <Navbar setShowCart={setShowCart} />
+        <MobNavbar setShowCart={setShowCart} />
+        <Hero />
+        <Category />
+        <FeatureSectionFruits />
+        <FeatureSectionBreakFast />
+        <Banner />
+        <BlogSection />
+        <NewsLetter />
+        <Feature />
+        <Footer />
+        
+        
+        {showCart && <Cart setShowCart={setShowCart} />}
+        
+      </main>
+    </CartContextProvider>
+  );
 }
 
 export default App;
