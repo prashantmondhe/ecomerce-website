@@ -33,7 +33,7 @@ const BlogSection = () => {
             <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8 pt-8">
                 {data.map((el, index) => (
                     <BlogCard
-                        key={index} // इथे आपण सुरक्षिततेसाठी index वापरत आहोत
+                        key={index} 
                         img={el.img}
                         title={el.title}
                         date={el.date}

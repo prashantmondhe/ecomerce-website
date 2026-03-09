@@ -1,16 +1,16 @@
 
 
-import FeatureCard from "../FeatureCard/FeatureCard"; // 'C' capital केला आहे
+import FeatureCard from "../FeatureCard/FeatureCard"; 
 
 import {
     LiaShippingFastSolid,
     LiaMoneyBillWaveSolid,
-    LiaGiftSolid, // स्पेलिंग दुरुस्त केले (Gift)
+    LiaGiftSolid, 
 } from "react-icons/lia";
 
 import { FiPhoneCall } from "react-icons/fi";
 
-// डेटा मध्ये ४था आयटम ऍड केला जेणेकरून ग्रिड पूर्ण भरेल
+
 const data = [
     {
         title: "Free Shipping",
@@ -35,7 +35,7 @@ const Feature = () => {
         <div className="container pt-16">
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
                 {data.map((el) => (
-                    // इथे ket च्या जागी key केले आणि props मध्ये योग्य स्पेस दिला
+                    
                     <FeatureCard 
                         key={el.title} 
                         title={el.title} 
