@@ -1,6 +1,8 @@
 
-import MobNavbar from './Components/MobNavbar/MobNavbar';
+
+import { useState } from 'react';
 import Navbar from './Components/Navbar/Navbar';
+import MobNavbar from './Components/MobNavbar/MobNavbar';
 import Hero from './Components/Hero/Hero';
 import Category from './Components/Category/Category';
 import FeatureSectionFruits from './Components/FeatureSectionFruits/FeatureSectionFruits';
@@ -11,19 +13,20 @@ import NewsLetter from './Components/NewsLetter/NewsLetter';
 import Feature from './Components/Feature/Feature';
 import Footer from './Components/Footer/Footer';
 import { CartContextProvider } from './Components/Context/CartContext';
-import { useState } from 'react';
-
 
 import Cart from './Components/Cart/Cart'; 
+import Login from './Components/Login/Login';
 
 const App = () => {
   const [showCart, setShowCart] = useState(false);
+  const [showLogin, setShowLogin] = useState(false); 
 
   return (
     <CartContextProvider>
-      <main>
-        <Navbar setShowCart={setShowCart} />
-        <MobNavbar setShowCart={setShowCart} />
+      <main className="relative">
+        <Navbar setShowCart={setShowCart} setShowLogin={setShowLogin} />
+        <MobNavbar setShowCart={setShowCart} setShowLogin={setShowLogin} />
+        
         <Hero />
         <Category />
         <FeatureSectionFruits />
@@ -33,10 +36,14 @@ const App = () => {
         <NewsLetter />
         <Feature />
         <Footer />
+
+        // {showLogin && <Login setShowLogin={setShowLogin} />}
+        
+        
+        {showLogin && <Login setShowLogin={setShowLogin} />}
         
         
         {showCart && <Cart setShowCart={setShowCart} />}
-        
       </main>
     </CartContextProvider>
   );
