@@ -1,65 +1,157 @@
 
 
+// import { IoSearchOutline } from "react-icons/io5";
+// import { FaRegUser } from "react-icons/fa";
+// import { AiOutlineShoppingCart } from "react-icons/ai";
+// import CartCountBadge from "../CartCountBadge/CartCountBadge";
+
+
+// const Navbar = ({ setShowCart, setShowLogin }: any) => {
+//   return (
+//     <div className="sticky top-0 bg-white z-10 shadow-sm">
+//       <div className="container hidden lg:block">
+//         <div className="flex justify-between items-center p-8">
+          
+          
+//           <div className="flex flex-col items-center cursor-pointer">
+//             <img 
+//               src="/logo.jfif" 
+//               alt="Website Logo" 
+//               className="h-10 lg:h-12 w-auto object-contain" 
+//             />
+//             <span className="text-sm md:text-base font-bold text-gray-800 mt-1 tracking-wide">
+//               FreshStore
+//             </span>
+//           </div>
+          
+          
+//           <div className="relative w-full max-w-[500px]">
+//             <input
+//               className="bg-[#f2f3f5] border-none outline-none pl-6 pr-12 py-3 rounded-[30px] w-full"
+//               type="text"
+//               placeholder="Search Product..."
+//             />
+//             <IoSearchOutline 
+//               className="absolute top-1/2 right-4 -translate-y-1/2 text-gray-500" 
+//               size={20} 
+//             />
+//           </div>
+
+         
+//           <div className="flex gap-4">
+           
+//             <div 
+//               className="icon_wrapper cursor-pointer hover:text-accent transition duration-200" 
+//               onClick={() => setShowLogin(true)}
+//             > 
+//                <FaRegUser />
+//             </div>
+            
+           
+//             <div 
+//               className="icon_wrapper relative cursor-pointer hover:text-accent transition duration-200" 
+//               onClick={() => setShowCart(true)}
+//             > 
+//                <AiOutlineShoppingCart />
+//                <CartCountBadge size="w-[25px] h-[25px]"/>
+//             </div>
+//           </div>
+          
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Navbar;
+
+
+import { useState, Dispatch, SetStateAction } from 'react';
+import { useNavigate } from 'react-router-dom'; // राउटिंगसाठी (Routing)
 import { IoSearchOutline } from "react-icons/io5";
 import { FaRegUser } from "react-icons/fa";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import CartCountBadge from "../CartCountBadge/CartCountBadge";
 
+interface NavbarProps {
+  setShowCart: Dispatch<SetStateAction<boolean>>;
+  setShowLogin: Dispatch<SetStateAction<boolean>>;
+}
 
-const Navbar = ({ setShowCart, setShowLogin }: any) => {
+const Navbar = ({ setShowCart, setShowLogin }: NavbarProps) => {
+  // १. सर्च क्वेरी साठवण्यासाठी state
+  const [searchQuery, setSearchQuery] = useState(""); 
+  const navigate = useNavigate();
+
+  // २. सर्च सबमिट झाल्यावर काय करायचे त्याचे फंक्शन
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault(); // पेज रिफ्रेश होण्यापासून थांबवते
+    if (searchQuery.trim() !== "") {
+      // युझरला सर्च रिझल्ट्स पेजवर पाठवणे (उदा. /search?q=apple)
+      navigate(`/search?q=${searchQuery}`); 
+    }
+  };
+
   return (
-    <div className="sticky top-0 bg-white z-10 shadow-sm">
-      <div className="container hidden lg:block">
+    <header className="sticky top-0 bg-white z-10 shadow-sm hidden lg:block">
+      <div className="container mx-auto">
         <div className="flex justify-between items-center p-8">
           
-          
-          <div className="flex flex-col items-center cursor-pointer">
+          <a href="/" className="flex flex-col items-center cursor-pointer">
             <img 
               src="/logo.jfif" 
-              alt="Website Logo" 
+              alt="FreshStore Logo" 
               className="h-10 lg:h-12 w-auto object-contain" 
             />
             <span className="text-sm md:text-base font-bold text-gray-800 mt-1 tracking-wide">
               FreshStore
             </span>
-          </div>
+          </a>
           
-          
-          <div className="relative w-full max-w-[500px]">
+          {/* ३. Form चा वापर जेणेकरून 'Enter' की (key) काम करेल */}
+          <form 
+            onSubmit={handleSearch} 
+            className="relative w-full max-w-[500px]"
+          >
             <input
               className="bg-[#f2f3f5] border-none outline-none pl-6 pr-12 py-3 rounded-[30px] w-full"
               type="text"
               placeholder="Search Product..."
+              aria-label="Search products"
+              value={searchQuery} // state ला input सोबत जोडले
+              onChange={(e) => setSearchQuery(e.target.value)} // टाईप केल्यावर state अपडेट होईल
             />
-            <IoSearchOutline 
-              className="absolute top-1/2 right-4 -translate-y-1/2 text-gray-500" 
-              size={20} 
-            />
-          </div>
+            <button 
+              type="submit" 
+              className="absolute top-1/2 right-4 -translate-y-1/2 text-gray-500 hover:text-accent transition-colors"
+              aria-label="Submit Search"
+            >
+              <IoSearchOutline size={20} />
+            </button>
+          </form>
 
-         
           <div className="flex gap-4">
-           
-            <div 
+            <button 
               className="icon_wrapper cursor-pointer hover:text-accent transition duration-200" 
               onClick={() => setShowLogin(true)}
+              aria-label="Open Login Modal"
             > 
-               <FaRegUser />
-            </div>
+               <FaRegUser size={24} />
+            </button>
             
-           
-            <div 
+            <button 
               className="icon_wrapper relative cursor-pointer hover:text-accent transition duration-200" 
               onClick={() => setShowCart(true)}
+              aria-label="Open Cart Modal"
             > 
-               <AiOutlineShoppingCart />
+               <AiOutlineShoppingCart size={24} />
                <CartCountBadge size="w-[25px] h-[25px]"/>
-            </div>
+            </button>
           </div>
           
         </div>
       </div>
-    </div>
+    </header>
   );
 };
 

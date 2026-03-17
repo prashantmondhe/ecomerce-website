@@ -1,21 +1,18 @@
-
-
 import { useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+// ग्लोबल कंम्पोनंट्स
 import Navbar from './Components/Navbar/Navbar';
 import MobNavbar from './Components/MobNavbar/MobNavbar';
-import Hero from './Components/Hero/Hero';
-import Category from './Components/Category/Category';
-import FeatureSectionFruits from './Components/FeatureSectionFruits/FeatureSectionFruits';
-import FeatureSectionBreakFast from './Components/FeatureSectionBreakFast/FeatureSectionBreakFast';
-import Banner from './Components/Banner/Banner';
-import BlogSection from './Components/BlogSection/BlogSection';
-import NewsLetter from './Components/NewsLetter/NewsLetter';
-import Feature from './Components/Feature/Feature';
 import Footer from './Components/Footer/Footer';
-import { CartContextProvider } from './Components/Context/CartContext';
-
 import Cart from './Components/Cart/Cart'; 
 import Login from './Components/Login/Login';
+import { CartContextProvider } from './Components/Context/CartContext';
+
+// पेजेस
+import Home from './Components/Home/Home';
+import SearchPage from './Components/SearchPage/SearchPage';
+import ProductDetails from './Components/ProductDetails/ProductDetails'; 
 
 const App = () => {
   const [showCart, setShowCart] = useState(false);
@@ -23,28 +20,27 @@ const App = () => {
 
   return (
     <CartContextProvider>
-      <main className="relative">
-        <Navbar setShowCart={setShowCart} setShowLogin={setShowLogin} />
-        <MobNavbar setShowCart={setShowCart} setShowLogin={setShowLogin} />
-        
-        <Hero />
-        <Category />
-        <FeatureSectionFruits />
-        <FeatureSectionBreakFast />
-        <Banner />
-        <BlogSection />
-        <NewsLetter />
-        <Feature />
-        <Footer />
+      <BrowserRouter>
+        <main className="relative flex flex-col min-h-screen">
+          
+          <Navbar setShowCart={setShowCart} setShowLogin={setShowLogin} />
+          <MobNavbar setShowCart={setShowCart} setShowLogin={setShowLogin} />
+          
+          <div className="flex-grow">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/search" element={<SearchPage />} />
+              <Route path="/product/:id" element={<ProductDetails />} />
+            </Routes>
+          </div>
 
-        // {showLogin && <Login setShowLogin={setShowLogin} />}
-        
-        
-        {showLogin && <Login setShowLogin={setShowLogin} />}
-        
-        
-        {showCart && <Cart setShowCart={setShowCart} />}
-      </main>
+          <Footer />
+          
+          {showLogin && <Login setShowLogin={setShowLogin} />}
+          {showCart && <Cart setShowCart={setShowCart} />}
+          
+        </main>
+      </BrowserRouter>
     </CartContextProvider>
   );
 }
