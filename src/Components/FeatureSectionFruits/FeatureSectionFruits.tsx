@@ -76,12 +76,109 @@
 
 //............
 
+// import ProductCard from '../ProductCard/ProductCard'; 
+// import { allProducts } from '../../data'; // नवीन डेटा फाईल इम्पोर्ट केली
+
+// const FeatureSectionFruits = () => {
+//     // फक्त फळे (Fruits) वेगळी काढणे (ज्यांचे ID १ ते ४ आहेत)
+//     const fruitProducts = allProducts.filter(item => item.id >= 1 && item.id <= 4);
+
+//     return (
+//         <section className="container mx-auto pt-16 px-4 pb-16">
+//             <h2 className="text-2xl font-bold mb-8 text-center sm:text-left text-gray-800">
+//                 Fresh Fruits
+//             </h2>
+            
+//             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+//                 {fruitProducts.map((el) => (
+//                     <ProductCard 
+//                         key={el.id} 
+//                         id={el.id} // ID पास करणे महत्त्वाचे आहे
+//                         img={el.image} 
+//                         name={el.name} 
+//                         price={`Rs. ${el.price}`} 
+//                     />
+//                 ))}
+//             </div>
+//         </section>
+//     );
+// };
+
+// export default FeatureSectionFruits;
+//................
+
+// import { useState, useEffect } from 'react';
+// import ProductCard from '../ProductCard/ProductCard';
+
+// const FeatureSectionFruits = () => {
+//     // API मधून येणारा डेटा साठवण्यासाठी state
+//     const [products, setProducts] = useState<any[]>([]);
+
+//     useEffect(() => {
+//         const fetchProducts = async () => {
+//             try {
+//                 // FakeStore API मधून पहिले ४ प्रॉडक्ट्स आणणे
+//                 const response = await fetch('https://fakestoreapi.com/products?limit=4');
+//                 const data = await response.json();
+                
+//                 setProducts(data); // डेटा थेट state मध्ये सेव्ह करणे
+//             } catch (error) {
+//                 console.error("Error fetching data: ", error);
+//             }
+//         };
+
+//         fetchProducts();
+//     }, []); // रिकामी Array म्हणजे हे फक्त एकदाच लोड होईल
+
+//     return (
+//         <section className="container mx-auto pt-16 px-4 pb-16">
+//             <h2 className="text-2xl font-bold mb-8 text-center sm:text-left text-gray-800">
+//                 Trending API Products
+//             </h2>
+            
+//             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+//                 {products.map((el) => (
+//                     <ProductCard 
+//                         key={el.id} 
+//                         id={el.id} 
+//                         img={el.image} 
+//                         name={el.title} // API मधून नाव title मध्ये येते
+//                         price={`Rs. ${Math.round(el.price * 80)}`} // डॉलरचे रुपये करण्यासाठी ८० ने गुणले
+//                     />
+//                 ))}
+//             </div>
+//         </section>
+//     );
+// };
+
+// export default FeatureSectionFruits;
+
+//..............
+
+import { useState, useEffect } from 'react';
 import ProductCard from '../ProductCard/ProductCard'; 
-import { allProducts } from '../../data'; // नवीन डेटा फाईल इम्पोर्ट केली
+import { allProducts } from '../../data'; 
 
 const FeatureSectionFruits = () => {
-    // फक्त फळे (Fruits) वेगळी काढणे (ज्यांचे ID १ ते ४ आहेत)
-    const fruitProducts = allProducts.filter(item => item.id >= 1 && item.id <= 4);
+    // API मधून आलेला डेटा साठवण्यासाठी
+    const [apiData, setApiData] = useState<any[]>([]);
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                // API कडून ४ प्रॉडक्ट्स मागवणे
+                const response = await fetch('https://fakestoreapi.com/products?limit=4');
+                const data = await response.json();
+                setApiData(data);
+            } catch (error) {
+                console.error("API Error: ", error);
+            }
+        };
+        fetchProducts();
+    }, []);
+
+    // आपले स्वतःचे ४ फळांचे प्रॉडक्ट्स
+    const myFruits = allProducts.filter(item => item.id >= 1 && item.id <= 4);
 
     return (
         <section className="container mx-auto pt-16 px-4 pb-16">
@@ -90,15 +187,27 @@ const FeatureSectionFruits = () => {
             </h2>
             
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                {fruitProducts.map((el) => (
-                    <ProductCard 
-                        key={el.id} 
-                        id={el.id} // ID पास करणे महत्त्वाचे आहे
-                        img={el.image} 
-                        name={el.name} 
-                        price={`Rs. ${el.price}`} 
-                    />
-                ))}
+                
+                {/* येथे आपली ट्रिक (Technique) आहे: 
+                  आपण API च्या डेटावर map (लूप) फिरवत आहोत, पण आतमध्ये आपले फळ (myFruits) दाखवत आहोत!
+                */}
+                {apiData.map((apiItem, index) => {
+                    // API च्या पहिल्या जागेवर आपलं पहिलं फळ (Apple)
+                    const fruit = myFruits[index]; 
+                    
+                    if (!fruit) return null; 
+
+                    return (
+                        <ProductCard 
+                            key={apiItem.id} 
+                            id={fruit.id} // सर्वात महत्त्वाचे: इथे API चा नाही, तर आपल्या फळाचा खरा ID द्यायचा!
+                            img={fruit.image} // आपला फोटो
+                            name={fruit.name} // आपले नाव
+                            price={`Rs. ${fruit.price}`} // आपली किंमत
+                        />
+                    );
+                })}
+
             </div>
         </section>
     );
