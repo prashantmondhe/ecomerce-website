@@ -25,7 +25,7 @@ const WishlistPage = () => {
         </div>
       ) : (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 mt-8">
-          {/* प्रॉडक्ट्स लूप करून दाखवणे */}
+         
           {wishlist.map((el) => (
             <ProductCard
               key={el.id}
