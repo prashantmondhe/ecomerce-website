@@ -1,6 +1,7 @@
 
 
-import { useState, Dispatch, SetStateAction } from 'react';
+//import { useState, Dispatch, SetStateAction } from 'react';
+import { useState, type Dispatch, type SetStateAction } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IoSearchOutline } from "react-icons/io5";
 import { FaRegUser, FaRegHeart } from "react-icons/fa"; 

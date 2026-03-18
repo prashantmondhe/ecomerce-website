@@ -1,8 +1,9 @@
 
-import { Dispatch, SetStateAction } from "react";
+
+//import { Dispatch, SetStateAction } from "react";
 import { RxCross1 } from "react-icons/rx";
 import { useCartContext } from "../Context/CartContext";
-
+import { type Dispatch, type SetStateAction } from "react";
 interface propsType {
   setShowCart: Dispatch<SetStateAction<boolean>>;
 }
